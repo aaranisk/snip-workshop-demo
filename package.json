@@ -33,5 +33,18 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
+  },
+  "overrides": {
+    "@angular-devkit/build-angular": {
+      "esbuild": "0.28.2",
+      "http-proxy-middleware@3": "3.0.10",
+      "webpack-dev-middleware": "7.4.5"
+    },
+    "@angular/build": {
+      "esbuild": "0.28.2"
+    },
+    "piscina": "4.9.4",
+    "postcss": "8.5.32",
+    "vite": "6.4.6"
   }
 }
