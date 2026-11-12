@@ -10,3 +10,7 @@
 	path = cli
 	url = https://github.com/aaranisk/snip-workshop-demo.git
 	branch = cli
+[submodule "bundle"]
+	path = bundle
+	url = https://github.com/aaranisk/snip-workshop-demo.git
+	branch = bundle

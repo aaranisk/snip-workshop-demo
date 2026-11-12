@@ -31,7 +31,7 @@ branch. This `main` branch pins the exact component commits used together.
 Clone with submodules initialized; a plain clone leaves those directories empty:
 
 ```sh
-git clone --recurse-submodules https://github.com/aaranisk/snip-workshop-demo.git
+git clone --branch main --recurse-submodules https://github.com/aaranisk/snip-workshop-demo.git
 cd snip-workshop-demo
 ```
 

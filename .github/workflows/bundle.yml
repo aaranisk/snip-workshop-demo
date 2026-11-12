@@ -1,0 +1,40 @@
+name: Build bundle
+
+on:
+  # Deliberately schedule-only: this file exists on main, so pushes to component branches cannot trigger it.
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main and submodules
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          submodules: true
+          fetch-depth: 0
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+      - name: Configure bot identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Audit frontend dependencies
+        working-directory: frontend
+        run: npm audit --audit-level=high
+      - name: Assemble bundle
+        run: node scripts/build-bundle.mjs
+      - name: Smoke test combined bundle
+        run: node scripts/smoke-test.mjs
+      - name: Publish bundle and pointers
+        run: node scripts/build-bundle.mjs --push
