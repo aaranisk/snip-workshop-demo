@@ -1,0 +1,104 @@
+<main class="page-shell">
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Snip home">
+      <span class="brand-mark" aria-hidden="true">s</span>
+      <span>snip</span>
+    </a>
+    <span class="header-note">A little link magic</span>
+  </header>
+
+  <section class="hero" aria-labelledby="page-title">
+    <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> Your links, made little</p>
+    <h1 id="page-title">Long link?<br><span>Make it Snip.</span></h1>
+    <p class="hero-copy">Turn any URL into a neat little link, ready to go wherever you do.</p>
+
+    <form class="shorten-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <label class="sr-only" for="url">URL to shorten</label>
+      <span class="input-icon" aria-hidden="true">↗</span>
+      <input
+        id="url"
+        type="url"
+        inputmode="url"
+        autocomplete="url"
+        placeholder="Paste your long URL here..."
+        formControlName="url"
+        [attr.aria-invalid]="form.controls.url.touched && form.controls.url.invalid"
+        [attr.aria-describedby]="form.controls.url.touched && form.controls.url.invalid ? 'url-error' : null">
+      <button type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'Snipping…' : 'Shorten link' }}
+        <span aria-hidden="true">↗</span>
+      </button>
+    </form>
+
+    @if (form.controls.url.touched && form.controls.url.hasError('required')) {
+      <p class="field-error" id="url-error">Enter a URL to shorten.</p>
+    } @else if (form.controls.url.touched && form.controls.url.hasError('httpUrl')) {
+      <p class="field-error" id="url-error">Use a valid http:// or https:// URL.</p>
+    }
+    @if (submitError()) {
+      <p class="notice notice-error" role="alert">{{ submitError() }}</p>
+    }
+    @if (createdLink(); as link) {
+      <div class="notice notice-success" role="status" aria-live="polite">
+        <span>Ready to share</span>
+        <a [href]="link.shortUrl" target="_blank" rel="noopener noreferrer">{{ link.shortUrl }}</a>
+      </div>
+    }
+  </section>
+
+  <section class="links-section" aria-labelledby="links-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Your collection</p>
+        <h2 id="links-title">Recent links</h2>
+      </div>
+      <span class="link-count">{{ links().length }} {{ links().length === 1 ? 'link' : 'links' }}</span>
+    </div>
+
+    @if (loading()) {
+      <p class="table-message" role="status">Loading your links…</p>
+    } @else if (listError()) {
+      <div class="table-message table-error" role="alert">
+        <span>{{ listError() }}</span>
+        <button class="retry-button" type="button" (click)="refreshLinks()">Try again</button>
+      </div>
+    } @else if (links().length === 0) {
+      <div class="empty-state">
+        <span class="empty-icon" aria-hidden="true">↗</span>
+        <h3>Your next great link starts here.</h3>
+        <p>Shorten a URL above and it’ll show up here.</p>
+      </div>
+    } @else {
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Short link</th>
+              <th scope="col">Original URL</th>
+              <th scope="col" class="hits-column">Clicks</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (link of links(); track link.code) {
+              <tr>
+                <td>
+                  <a class="short-link" [href]="link.shortUrl" target="_blank" rel="noopener noreferrer">
+                    {{ link.shortUrl }}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                </td>
+                <td class="original-url" [title]="link.url">{{ link.url }}</td>
+                <td class="hits-column"><span class="hit-count">{{ link.hits }}</span></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+
+  <footer class="site-footer">
+    <span>Small links. Big places.</span>
+    <span>Made with a little ✳</span>
+  </footer>
+</main>

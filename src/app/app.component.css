@@ -1,0 +1,48 @@
+.shorten-form { display: flex; align-items: center; gap: 12px; max-width: 730px; margin: 34px auto 0; padding: 9px 10px 9px 21px; border: 1px solid #e4e9e5; border-radius: 19px; background: white; box-shadow: 0 16px 42px rgba(27,62,43,.09); text-align: left; }
+.shorten-form:focus-within { border-color: #9ac9ac; box-shadow: 0 0 0 4px rgba(49,135,82,.1); }
+.input-icon { color: #9aa8a0; font-size: 1.25rem; }
+input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font: inherit; }
+input::placeholder { color: #a0aaa4; }
+.shorten-form button, .retry-button { font: inherit; font-weight: 650; cursor: pointer; }
+.shorten-form button { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 13px; min-height: 49px; padding: 0 19px; border: 0; border-radius: 12px; background: var(--green); color: white; }
+.shorten-form button:hover:not(:disabled) { background: var(--green-dark); }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid #73bd8d; outline-offset: 3px; }
+.shorten-form button:disabled { opacity: .68; cursor: wait; }
+.field-error, .notice { max-width: 730px; margin: 12px auto 0; text-align: left; }
+.field-error { color: #b42318; font-size: .84rem; }
+.notice { padding: 15px 18px; border-radius: 13px; }
+.notice-error { border: 1px solid #f4c7c3; background: #fff7f6; color: #9d2922; }
+.notice-success { display: flex; align-items: center; justify-content: space-between; gap: 16px; border: 1px solid #cce8d5; background: #f2fbf5; }
+.notice-success span { color: #50715d; font-size: .82rem; }
+.notice-success a, .short-link { color: var(--green); font-weight: 650; text-decoration: none; }
+.notice-success a:hover, .short-link:hover { text-decoration: underline; }
+.links-section { padding: 29px; border: 1px solid #e8ece8; border-radius: 22px; background: white; box-shadow: 0 12px 32px rgba(31,55,39,.045); }
+.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 22px; }
+.section-heading h2 { margin: 7px 0 0; color: var(--ink); font-size: 1.5rem; letter-spacing: -.055em; }
+.link-count, .hit-count { border-radius: 8px; background: #f0f5f1; color: #607066; }
+.link-count { padding: 6px 11px; border-radius: 99px; font-size: .77rem; }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th { padding: 0 13px 12px; color: #8a968e; font-size: .68rem; letter-spacing: .09em; text-transform: uppercase; }
+td { max-width: 0; padding: 16px 13px; border-top: 1px solid #edf0ed; font-size: .87rem; }
+.short-link { white-space: nowrap; }
+.short-link span { margin-left: 4px; }
+.original-url { overflow: hidden; color: #717d75; text-overflow: ellipsis; white-space: nowrap; }
+.hits-column { width: 75px; text-align: right; }
+.hit-count { display: inline-grid; min-width: 30px; min-height: 27px; place-items: center; padding: 0 7px; font-size: .78rem; font-variant-numeric: tabular-nums; }
+.empty-state, .table-message { display: flex; min-height: 170px; flex-direction: column; align-items: center; justify-content: center; padding: 22px; color: var(--muted); text-align: center; }
+.empty-icon { display: grid; width: 42px; height: 42px; place-items: center; margin-bottom: 12px; border-radius: 14px; background: #eef7f0; color: var(--green); font-size: 1.35rem; }
+.empty-state h3 { margin: 0; color: var(--ink); font-size: .98rem; }
+.empty-state p { margin: 7px 0 0; font-size: .85rem; }
+.table-message { gap: 13px; font-size: .9rem; }
+.table-error { color: #9d2922; }
+.retry-button { border: 0; background: transparent; color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; clip-path: inset(50%); }
+@media (max-width: 600px) {
+  .shorten-form { flex-wrap: wrap; padding: 15px; }
+  .shorten-form input { width: calc(100% - 34px); min-height: 36px; }
+  .shorten-form button { width: 100%; justify-content: center; }
+  .links-section { padding: 20px 15px; }
+  th, td { padding-right: 8px; padding-left: 8px; }
+  td { font-size: .8rem; }
+}
