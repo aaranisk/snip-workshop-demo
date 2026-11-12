@@ -45,6 +45,8 @@
     },
     "piscina": "4.9.4",
     "postcss": "8.5.32",
+    "serialize-javascript": "7.1.4",
+    "tar": "7.5.23",
     "vite": "6.4.6"
   }
 }
