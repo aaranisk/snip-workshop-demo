@@ -6,6 +6,13 @@ import { dirname, resolve } from 'node:path';
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const bundleDir = resolve(repoRoot, 'bundle');
 const baseUrl = process.env.SNIP_SMOKE_URL || 'http://localhost:3000';
+const bun = spawnSync('bun', ['--version'], { encoding: 'utf8' });
+if (bun.error) {
+  throw new Error(`Bun is required for the bundle smoke test: ${bun.error.message}`);
+}
+if (bun.status !== 0) {
+  throw new Error(`Bun version check failed with exit code ${bun.status}.`);
+}
 const server = spawn('bun', ['server.js'], {
   cwd: bundleDir,
   env: { ...process.env, PORT: new URL(baseUrl).port || '3000' },
